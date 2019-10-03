@@ -18,7 +18,6 @@ $router->get('/', function () use ($router) {
 });
 
 $router->post('register', 'UserController@register');
-// $router->get('api/login','LoginController@login');
 
 $router->group(['prefix' => 'api/'], function ($router) {
     $router->get('login/','UserController@authenticate');
@@ -29,11 +28,6 @@ $router->group(['prefix' => 'api/'], function ($router) {
     $router->delete('todo/{id}/', 'TodoController@destroy');
 });
 
-// $app->group(['prefix' => 'api/'], function ($app) {
-//     $app->get('login/','UsersController@authenticate');
-//     $app->post('todo/','TodoController@store');
-//     $app->get('todo/', 'TodoController@index');
-//     $app->get('todo/{id}/', 'TodoController@show');
-//     $app->put('todo/{id}/', 'TodoController@update');
-//     $app->delete('todo/{id}/', 'TodoController@destroy');
-//     });
+$router->get('/{route:.*}/', function ()  {
+    return view('app');
+});
