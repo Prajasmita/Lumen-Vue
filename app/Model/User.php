@@ -1,32 +1,23 @@
 <?php
 namespace App\Model;
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-class User extends Authenticatable
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticableTrait;
+class User extends Model implements Authenticatable
 {
-    use Notifiable;
-    /**
-    * The attributes that are mass assignable.
-    *
-    * @var array
-    */
-    protected $fillable = [
-        'name', 'email', 'password','userimage'
-    ];
-    /**
-    * The attributes that should be hidden for arrays.
-    *
-    * @var array
-    */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-    /*
-    * Get Todo of User
-    *
-    */
-    public function todo()
-    {
-        return $this->hasMany('App\Todo');
-    }
+   //
+//    use Authorizable;
+   use AuthenticableTrait;
+   protected $fillable = ['username','email','password','userimage'];
+   protected $hidden = [
+   'password', 'api_key'
+   ];
+   /*
+   * Get Todo of User
+   *
+   */
+   public function todo()
+   {
+       return $this->hasMany('App\Model\Todo','user_id');
+   }
 }

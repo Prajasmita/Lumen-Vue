@@ -9,6 +9,6 @@ class Todo extends Model
 
     public function todo()
     {
-         return $this->hasMany('App\Todo');
+         return $this->hasMany('App\Model\Todo');
     }
 }

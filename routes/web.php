@@ -12,5 +12,28 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return response()->json(['version' => $router->app->version()], 200);        
+
+    // return $router->app->version();
 });
+
+$router->post('register', 'UserController@register');
+// $router->get('api/login','LoginController@login');
+
+$router->group(['prefix' => 'api/'], function ($router) {
+    $router->get('login/','UserController@authenticate');
+    $router->post('todo/','TodoController@store');
+    $router->get('todo/', 'TodoController@index');
+    $router->get('todo/{id}/', 'TodoController@show');
+    $router->put('todo/{id}/', 'TodoController@update');
+    $router->delete('todo/{id}/', 'TodoController@destroy');
+});
+
+// $app->group(['prefix' => 'api/'], function ($app) {
+//     $app->get('login/','UsersController@authenticate');
+//     $app->post('todo/','TodoController@store');
+//     $app->get('todo/', 'TodoController@index');
+//     $app->get('todo/{id}/', 'TodoController@show');
+//     $app->put('todo/{id}/', 'TodoController@update');
+//     $app->delete('todo/{id}/', 'TodoController@destroy');
+//     });
